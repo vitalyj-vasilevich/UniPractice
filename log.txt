@@ -1,0 +1,11 @@
+commit 7f03d2435310acba1a7f3c63efae2e704abb1f2a
+Author: vitalyj-vasilevich <vitalyj-vasilevich@gmail.com>
+Date:   Tue Feb 12 19:32:46 2019 +0300
+
+    added status
+
+commit 31ba0968c29adc1d6e9c430f216abc4707fa68e6
+Author: vitalyj-vasilevich <vitalyj-vasilevich@gmail.com>
+Date:   Tue Feb 12 19:28:40 2019 +0300
+
+    Added gitignore
