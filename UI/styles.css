@@ -1,0 +1,28 @@
+body{
+    background-color: darkkhaki;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: black;
+}
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 10%;
+    background-color: darkgoldenrod;
+    width: 100%;
+}
+
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+#log-button{
+    position: relative;
+    margin-left: 30px;
+    margin-top: 15px;
+    width: 100px;
+}
