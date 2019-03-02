@@ -9,9 +9,12 @@ header{
     position: fixed;
     top: 0;
     left: 0;
-    height: 10%;
+    max-height: 50px;
+    height: 50px;
     background-color: darkgoldenrod;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 footer{
@@ -25,4 +28,62 @@ footer{
     margin-left: 30px;
     margin-top: 15px;
     width: 100px;
+}
+
+.photo-wall{
+    margin-right: 5%;
+    margin-left: 25%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.photo-block{
+    height: 100%;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: solid 4px;
+}
+
+.photo-name{
+    font-size: 20px;
+    color: darkslategrey;
+    height: 20px;
+}
+
+.like-button{
+    background-color: red;
+}
+
+.tags{
+    overflow-x: scroll;
+    width: inherit;
+}
+
+.photo{
+    max-width: 100%;
+    max-height: 100%;
+    height: inherit - 10%;
+    width: inherit - 10%;
+    position: relative;
+    border: 3px;
+    border-color: blue;
+}
+
+.photo-info{
+    width: inherit;
+    background-color: aquamarine;
+}
+
+#filters-button{
+    right: 2%;
+    bottom: 2%;
+    background-color: darkblue;
+    position: fixed;
+}
+
+p{
+    text-align: center;
 }
