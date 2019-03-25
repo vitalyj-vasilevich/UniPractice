@@ -189,9 +189,6 @@ let otherPosts = [
 ];
 
 class PhotoPostsCollection{
-    constructor(photoPposts){
-        this._photoPosts = photoPposts;
-    }
 
     static isEmptyString(str){
         return (str.trim() == ' ');
@@ -199,28 +196,35 @@ class PhotoPostsCollection{
     
     static validatePost(photoPost){
         if(!photoPost.hasOwnProperty('description') | typeof(photoPost.description) != 'string'
-        | PhotoPostsCollection.isEmptyString(photoPost.description) | photoPost.description.length){
+        | PhotoPostsCollection.isEmptyString(photoPost.description) | photoPost.description.length > 200){
+            console.log('wrong description ' + photoPost.description)
             return false;
         }
         if(!photoPost.hasOwnProperty('id') | typeof(photoPost.id) !== 'string' |
          PhotoPostsCollection.isEmptyString(photoPost.id)){
+             console.log('wrong id ' + photoPost.id)
             return false;
         }
-        if(!photoPost.hasOwnProperty('createdAt') | typeof(photoPost.createdAt) !== 'Date'){
+        if(!photoPost.hasOwnProperty('createdAt') | !(photoPost.createdAt instanceof Date)){
+            console.log('wrong Date ' + photoPost.createdAt)
             return false;
         }
         if(!photoPost.hasOwnProperty('author') | typeof(photoPost.author) !== 'string' |
         PhotoPostsCollection.isEmptyString(photoPost.author)){
+            console.log('wrong author ' + photoPost.author)
             return false;
         }
         if(!photoPost.hasOwnProperty('photoLink') | typeof(photoPost.photoLink) !== 'string' |
         PhotoPostsCollection.isEmptyString(photoPost.photoLink)){
+            console.log('wrong photolink ' + photoPost.photoLink)
             return false;
         }
         return true;
     }
 
-    
+    constructor(photoPposts){
+        this._photoPosts = photoPosts.filter(item => PhotoPostsCollection.validatePost(item));
+    }
 
     get(id){
         let toReturn = this._photoPosts.find(x => x.id === id);
@@ -270,23 +274,27 @@ class PhotoPostsCollection{
         return validatePhotoPost(post);
     }
 
-    getPage(skip = 0, top = 10, filterConfing){
-        var filteredPosts = [];
+    getPage(filterConfing, skip = 0, top = 10){
+        let filteredPosts = this._photoPosts.slice(0, this._photoPosts.length);
+        console.log('Filtered posts before filter');
+        console.log(filteredPosts);
         if(filterConfing){
-            if(filterConfing.author){
-                for(item of photoPosts){
-                    if(item.author == filterConfing.author){
-                        filteredPosts.push(item);
-                    }
+            if(filterConfing.hasOwnProperty('author')){
+                filteredPosts = filteredPosts.filter(item => item.author === filterConfing.author);
+            }
+            if(filterConfing.hasOwnProperty('hashTags')){
+                for(tag of filterConfing.hashTags){
+                    filteredPosts = filteredPosts.filter(item => item.hashTags.find(
+                        item => item.toLocaleLowerCase() === tag.toLocaleLowerCase()
+                    ))
+                    console.log('Checking tags')
                 }
             }
-        }
-        filteredPosts.sort((a,b) => b.createdAt - a.createdAt);
-        if(filteredPosts.length - skip >= top){
-            return filteredPosts.splice(skip - 1, top);
-        }else{
-            return filteredPosts.splice(filteredPosts.length - 1 - top, top);
-        }
+        }        
+        filteredPosts.sort((a, b) => a.createdAt - b.createdAt);
+        console.log('Filtered posts:');
+        console.log(filteredPosts);
+        return filteredPosts.splice(skip, top);
     }
 
     clear(){
@@ -304,10 +312,12 @@ class PhotoPostsCollection{
         });
         return invalide;
     }
-
-    
 };
 
 let photoPostsCollection = new PhotoPostsCollection(photoPosts);
 console.log(photoPostsCollection._photoPosts);
 console.log(photoPostsCollection.addAll(otherPosts));
+console.log(photoPosts);
+console.log(photoPostsCollection.getPage({}));
+console.log(photoPostsCollection.getPage({}, 3, 5));
+console.log(photoPostsCollection.getPage({author : 'Ivanov Ivan'}));
