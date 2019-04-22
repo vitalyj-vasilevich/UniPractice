@@ -166,7 +166,7 @@
             createdAt : new Date('2019-11-11T14:35:00'),
             author : 'Petya',
             photoLink : 'http://ont.by/webroot/delivery/files/news/2018/02/22/Dom.jpg',
-            hashTags : ['funny', 'cats', 'anime', 'girls'],
+            hashTags : ['anime', 'girls'],
         },
     
     ]
