@@ -77,41 +77,85 @@ class View{
         head.appendChild(logout);
     }
 
+    static showAdd(){
+        document.getElementById('add').setAttribute('style','display: relative');
+    }
+
+    static hideAdd() {
+        document.getElementById('add').setAttribute('style', 'display: none');
+    }
+
+    static showLogInWindow() {
+        document.getElementsByClassName('login-window')[0].setAttribute('style', 'display: flex');
+        document.querySelectorAll('.cancel-login')[0].onclick = function(){
+            View.hideLogInWindow();
+        };
+    }
+
+    static hideLogInWindow() {
+        document.getElementsByClassName('login-window')[0].setAttribute('style', 'display: none');
+    }
+
+    static showRemoveWindow(id) {
+        document.getElementsByClassName('remove-window')[0].setAttribute('style', 'display: flex');
+        document.querySelectorAll('.submit-remove')[0].onclick = function(){
+            Controller.deletePost(id);
+        };
+        document.querySelectorAll('.close-remove')[0].onclick = function(){
+            View.hideDeleteWindow();
+        };
+    }
+
+    static hideRemoveWindow() {
+        document.getElementsByClassName('remove-window')[0].setAttribute('style', 'display: none');
+    }
+
+    static showEditWindow(post) {
+        document.getElementsByClassName('edit-window')[0].setAttribute('style', 'display: flex');
+        document.getElementsByClassName('edit-form')[0].elements.path.value = post.photoLink;
+        document.getElementsByClassName('edit-form')[0].elements.description.value = post.description;
+        document.getElementsByClassName('edit-form')[0].elements.tags.value = post.tags.join('#');
+        document.querySelectorAll('.submit-edit')[0].onclick = function(){
+            Controller.editPost(post);
+        };
+        document.querySelectorAll('.close-edit')[0].onclick = function(){
+            View.hideEditWindow();
+        };
+    }
+
+    static hideEditWindow() {
+        document.getElementsByClassName('edit-window')[0].setAttribute('style', 'display: none');
+    }
+
+    static showAddWindow() {
+        document.getElementsByClassName('add-window')[0].setAttribute('style', 'display: flex');
+        document.querySelectorAll('.close-add')[0].onclick = function(){
+            View.hideAddWindow();
+        };
+    }
+
+    static hideAddWindow() {
+        document.getElementsByClassName('add-window')[0].setAttribute('style', 'display: none');
+    }
+
+    static showEditOrRemoveWindow(post) {
+        document.getElementsByClassName('edit-or-remove-window')[0].setAttribute('style', 'display: flex');
+        document.querySelectorAll('.delete-button')[0].onclick = function(){
+            View.showDeleteWindow(post.id)
+            View.hideDeleteOrEditWindow();
+        };
+        document.querySelectorAll('.edit-button')[0].onclick = function(){
+            View.showEditWindow(post);
+            View.hideDeleteOrEditWindow();
+        };
+        document.querySelectorAll('.close-edit-or-remove')[0].onclick = function(){
+            View.hideDeleteOrEditWindow();
+        };
+    }
+
+    static hideEditOrRemoveWindow() {
+        document.getElementsByClassName('delete-or-edit')[0].setAttribute('style', 'display: none');
+    }
 };
 
 let photoWall = document.getElementsByClassName("photo-wall")[0];
-View.displayPost(photoWall, {
-    id : '1',
-    description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non so',
-    createdAt : new Date('2018-02-23T23:00:00'),
-    author : 'Vitaly Vasilevich',
-    photoLink : 'amine1.jpg',
-    hashTags : ['funny', 'cats', 'anime', 'girls']
-});
-View.displayPost(photoWall, {
-    id : '9',
-        description : 'Phasellus faucibus ex ornare nibh varius, id lacinia dolor bibendum.',
-        createdAt : new Date('2018-02-23T23:00:00'),
-        author : 'Ivanov Ivan',
-        photoLink : 'anime6.png',
-        hashTags : ['funny', 'health', 'anime', 'girls'],
-});
-View.displayPost(photoWall, {
-    id : '21',
-        description : 'Proin eros lacus, sodales sed cursus nec, lobortis eu purus. Morbi vel mattis urna.',
-        createdAt : new Date('2019-11-11T14:35:00'),
-        author : 'Petya',
-        photoLink : 'anime8.jpg',
-        hashTags : ['anime', 'girls'],
-});
-View.showUI('Uasya');
-View.removePost(photoWall, '21');
-View.replacePost(photoWall, {
-    id : '1',
-    description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non so',
-    createdAt : new Date('2018-02-23T23:00:00'),
-    author : 'Vitaly Vasilevich',
-    photoLink : 'redHat.jpg',
-    hashTags : ['pain', 'anger', 'hate']
-});
-View.removeAll(photoWall);

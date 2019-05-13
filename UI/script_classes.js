@@ -219,10 +219,14 @@ class PhotoPostsCollection{
             console.log('wrong photolink ' + photoPost.photoLink)
             return false;
         }
+        if(!photoPost.hasOwnProperty('likes') | typeof(photoPost.likes) !== number | photoPost.likes < 0){
+            console.log('invalid likes ' + photoPost.likes)
+            return false;
+        }
         return true;
     }
 
-    constructor(photoPposts){
+    constructor(photoPosts){
         this._photoPosts = photoPosts.filter(item => PhotoPostsCollection.validatePost(item));
     }
 
@@ -268,8 +272,11 @@ class PhotoPostsCollection{
         if(photoPost.hasOwnProperty('photoLink') && !PhotoPostsCollection.isEmptyString(photoPost.photoLink)){
             post.photoLink = photoPost.photoLink;
         }
-        if(!photoPost.hasOwnProperty('hashTags')){
+        if(photoPost.hasOwnProperty('hashTags')){
             post.hashTags = photoPost.hashTags;
+        }
+        if(photoPost.hasOwnProperty('likes') && photoPost.likes >= 0){
+            post.likes = photoPost.likes;
         }
         return validatePhotoPost(post);
     }
@@ -287,8 +294,8 @@ class PhotoPostsCollection{
                     filteredPosts = filteredPosts.filter(item => item.hashTags.find(
                         item => item.toLocaleLowerCase() === tag.toLocaleLowerCase()
                     ))
-                    console.log('Checking tags')
                 }
+                console.log('Checking tags')
             }
         }        
         filteredPosts.sort((a, b) => a.createdAt - b.createdAt);

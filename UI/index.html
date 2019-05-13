@@ -8,12 +8,55 @@
     </head>
     <body>
         <header>
-            <button id="log-button">Log in</button>
+            <!--<button id="log-button">Log in</button>-->
             <div class="search">
                 <button type="submit" >Search</button>
                 <input placeholder="search text">                    
             </div>  
         </header>
+        <div class="login-window">
+            <h2>Login</h2>
+            <form class="login-form">
+                <p><input type="text" name="login" maxlength="30" placeholder="Login"></p>
+			    <p><input type="password" name="password"maxlength="30" placeholder="Password"></p>
+			    <button type="button" class="close-login">Close</button>
+			    <button type="button" class="login-button">Log In</button>
+            </form>
+        </div>
+        <div class="edit-or-remove-window">
+            <form class="edit-form">
+                <button type="button" class="close-edit-or-remove">Close</button>
+			    <button class="remove-button" type="button">Delete</button>
+			    <button class="edit-button" type="button">Edit</button>
+            </form>
+        </div>
+        <div class="remove-window">
+            <h3>Delete</h3>
+			<form class="remove-form">
+				<button type="button" class="cancel-remove">No</button>
+				<button type="button" class="submit-remove">Yes</button>
+			</form>
+        </div>
+        <div class="add-window">
+            <h3>Add</h3>
+            <form class="add-form">
+                <p><input type="text" name="path" maxlength="100" placeholder="Path"></p>
+                <p><input type="text" name="tags" maxlength="30" placeholder="#Tags"></p>
+                <p><textarea type="text" name="description" maxlength="300" placeholder="Description" rows="4"></textarea></p>
+                <button type="button" class="close-add">Close</button>
+                <button type="button" class="submit-add">Add</button>
+            </form>
+        </div>
+        <div class="edit-window">
+            <h3>Edit</h3>
+            <form class="edit-form">
+                <p><input type="text" name="path" maxlength="100" placeholder="Path"></p>
+                <p><input type="text" name="tags" maxlength="30" placeholder="#Tags"></p>
+                <p><textarea type="text" name="description" maxlength="300" placeholder="Description" rows="4"></textarea></p>
+                <button type="button" class="close-edit">Cancel</button>
+                <button type="button" class="submit-edit">Edit</button>
+            </form>
+        </div>
         <div class="filters-top">    
             <form>
                 <input type="date"><br>
@@ -47,69 +90,38 @@
                 <p>vitalyj-vasilevich@gmail.com</p>
                 <p>03.04.2019</p>
         </footer>
-        <template id="log-template">
-            <button class="log-button">Log in</button>
-        </template>
-        <template id="logged-template"> 
-            <div class="user-info">
-                <h3 id="user"></h3>
-                <button class="add-button">Add post</button>
-                <button class="log-out-button">Log out</button>
-            </div>
-        </template>
-        <template id="post-template">
-            <div class="photo-block" id="photo-block">
-                <div class="photo-header">
-                        <h3 id="name"></h3>
-                        <h3 id="author"></h3>
-                </div>
-                <img class="photo" id="photo">             
-                <div class="photo-info">
-                    <div class="like-zone">
-                        <h2 id="likes-amount"></h2>                                               
-                    </div>
-                    <h4 id="date"></h4>                    
-                    <div class="tags-list" id="tags-list"></div>                                      
-                </div>
-                <span class="photo-description" id="photo-description"></span>
-            </div>            
-        </template>
-        <template id="more-template">
-            <button class="show-more-button" id="more">Load more photos</button>
-        </template>          
     </body>
+    <template id="log-template">
+        <button class="log-button">Log in</button>
+    </template>
+    <template id="logged-template"> 
+        <div class="user-info">
+            <h3 id="user"></h3>
+            <button class="add-button">Add post</button>
+            <button class="log-out-button">Log out</button>
+        </div>
+    </template>
+    <template id="post-template">
+        <div class="photo-block" id="photo-block">
+            <div class="photo-header">
+                    <h3 id="name"></h3>
+                    <h3 id="author"></h3>
+            </div>
+            <img class="photo" id="photo">             
+            <div class="photo-info">
+                <div class="like-zone">
+                    <h2 id="likes-amount"></h2>                                               
+                </div>
+                <h4 id="date"></h4>                    
+                <div class="tags-list" id="tags-list"></div>                                      
+            </div>
+            <span class="photo-description" id="photo-description"></span>
+        </div>            
+    </template>
+    <template id="more-template">
+        <button class="show-more-button" id="more">Load more photos</button>
+    </template>          
     <script src="script_classes.js"></script>
     <script src="view.js"></script>
+    <script src="controller.js"></script>
 </html>
-
-
-<!--<div class="photo-block">
-                <div class="photo-header">
-                    <h3>My boyfriend and I</h3>
-                    <h3>Vitaly Vasilevich</h3>
-                </div>
-                    <img class="photo" src="amine1.jpg" alt="Unable to load photo">             
-                <div class="photo-info">
-                    <div class="like-zone">
-                        <h2>1337 Likes</h2>                        
-                    </div>
-                    <h4>Posted: 19.02.1861</h4>                    
-                    <div class="tags-list">
-                        <span class="tag">#anime</span>
-                        <span class="tag">#love</span>
-                        <span class="tag">#like4like</span>
-                        <span class="tag">#beaty</span>
-                        <span class="tag">#minsk</span>
-                        <span class="tag">#vsco</span>
-                        <span class="tag">#2dgirls</span>
-                        <span class="tag">#great</span>   
-                        <span class="tag">#девочки</span>   
-                        <span class="tag">#лайкзалайк</span>       
-                        <span class="tag">#сердечко</span> 
-                        <span class="tag">#подружки</span>      
-                        <span class="tag">#ватрушки</span>   
-                        <span class="tag">#вместенавсегда</span>                   
-                    </div>
-                    <span class="photo-description">Из ахейских героев скоро и благополучно вернулись домой очень немногие: Нестор, Диомед, Идоменей. Аякс «Великий» погиб вскоре после смерти Ахиллеса. Как самому выдающемуся герою троянской войны, ахейцы присудили вооружение Ахиллеса Одиссею. Обиженный Аякс покончил самоубийством. Другой Аякс, сын Оилея, потерпел в море кораблекрушение. Выбравшись на скалу, он хвастливо заявил, что спасся против воли богов. Посейдон ударил трезубцем в скалу, расколол ее и обрушил осколок с Аяксом в бушевавшее море. Агамемнон, тотчас же по возвращении домой, был убит на пиру Эгистом, любовником его жены Клитемнестры. Менелай возвратился с Еленою домой только после долгих скитаний. Наибольшие испытания выпали на долю Одиссея. Он попал домой только через десять лет по отплытии из Трои и через двадцать лет по отъезде на войну с родного острова Итаки. Дома он оставил жену свою Пенелопу и малолетнего сына Телемаха. Дом его наполнился знатными молодыми людьми с Итаки и соседних островов. Решив, что Одиссей уже погиб, они убеждали Пенелопу выбрать себе из их среды нового мужа, а в ожидании ответа пировали с утра до вечера в доме Одиссея, поедали его скот и опустошали винные подвалы. Целомудренная и верная
-                    </span>
-                </div>                      -->
