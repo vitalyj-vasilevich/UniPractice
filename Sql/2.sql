@@ -1,0 +1,3 @@
+USE PHOTO_PORTAL;
+SELECT * FROM photo_post 
+WHERE USER_ID = 1;
